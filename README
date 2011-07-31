@@ -1,0 +1,28 @@
+This is a sample snake client for Murdersnake
+
+Runs on Sinatra has a very simple AI.
+
+  Setup:
+    gem install sinatra
+
+  Run it with:
+    ruby -rubygems main.rb
+
+  Run the tests with:
+    rspec spec
+
+  Test it via curl with:
+    curl -d "map=...%0A..1" http://localhost:4567/snake
+    (%0A is a url-encoded newline)
+
+AI description:
+
+  if north is not blocked
+    north
+  else if west is not blocked
+    west
+  else if south is not blocked
+    south
+  else
+    east
+  end
