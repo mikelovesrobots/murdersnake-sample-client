@@ -11,7 +11,7 @@ class AI
      [map.player.west, "w"],
      [map.player.south, "s"]
     ].each do |coordinate, dir|
-      return dir if map.coordinate_is_empty?(coordinate)
+      return dir if map.coordinate_is_valid?(coordinate) and map.coordinate_is_empty?(coordinate)
     end
 
     "e"

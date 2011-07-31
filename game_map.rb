@@ -27,6 +27,11 @@ class GameMap
     self[coordinate] == "."
   end
 
+  def coordinate_is_valid?(coordinate)
+    coordinate.x >= 0 and coordinate.x < width and
+    coordinate.y >= 0 and coordinate.y < height
+  end
+
   def [](coordinate)
     map[coordinate.y] and map[coordinate.y][coordinate.x]
   end

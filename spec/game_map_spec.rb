@@ -48,4 +48,11 @@ describe GameMap do
     subject.coordinate_is_empty?(Coordinate.new(7,0)).should_not be
     subject.coordinate_is_empty?(Coordinate.new(8,0)).should_not be
   end
+
+  it "should be able to tell you if a coordinate is valid" do
+    subject.coordinate_is_valid?(Coordinate.new(-1,-1)).should_not be
+    subject.coordinate_is_valid?(Coordinate.new(0,0)).should be
+    subject.coordinate_is_valid?(Coordinate.new(19,9)).should be
+    subject.coordinate_is_valid?(Coordinate.new(20,10)).should_not be
+  end
 end
