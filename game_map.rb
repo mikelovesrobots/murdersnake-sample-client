@@ -1,31 +1,40 @@
 class GameMap
-  attr_reader :width, :height, :player, :opponents
+  attr_reader :map, :width, :height, :player, :opponents
 
-  def initialize(map)
-    rows = map.split("\n")
-    @width = rows.first.length
-    @height = rows.length
-    @player = find_player(rows)
-    @opponents = find_opponents(rows)
+  def initialize(game_map)
+    @map = game_map.split("\n")
+    @width = map.first.length
+    @height = map.length
+    @player = find_player
+    @opponents = find_opponents
   end
 
-  def find_player(rows)
-    find_coordinate!(rows, "1")
+  def find_player
+    find_coordinate!("1")
   end
 
-  def find_opponents(rows)
+  def find_opponents
     [].tap do |opponents|
       i = 2
-      while (coordinate = find_coordinate(rows, i))
+      while (coordinate = find_coordinate(i))
         opponents << coordinate
         i += 1
       end
     end
   end
 
+  def coordinate_is_empty?(coordinate)
+    self[coordinate] == "."
+  end
+
+  def [](coordinate)
+    map[coordinate.y] and map[coordinate.y][coordinate.x]
+  end
+
   private
-  def find_coordinate(rows, character)
-    rows.each_with_index do |row, y|
+
+  def find_coordinate(character)
+    map.each_with_index do |row, y|
       x = row.index(character.to_s)
       if x then
         return Coordinate.new(x,y)
@@ -35,17 +44,7 @@ class GameMap
     return nil
   end
 
-  def find_coordinate!(rows, character)
-    find_coordinate(rows, character) or raise ArgumentError, "This map doesn't have a #{character.inspect}"
-  end
-end
-
-
-class Coordinate
-  attr_accessor :x, :y
-
-  def initialize(x,y)
-    @x = x
-    @y = y
+  def find_coordinate!(character)
+    find_coordinate(character) or raise ArgumentError, "This map doesn't have a #{character.inspect}"
   end
 end

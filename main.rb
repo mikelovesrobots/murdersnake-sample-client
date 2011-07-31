@@ -1,7 +1,9 @@
 require 'sinatra'
+require File.join(File.dirname(__FILE__), "coordinate.rb")
+require File.join(File.dirname(__FILE__), "ai.rb")
 require File.join(File.dirname(__FILE__), "game_map.rb")
 
 get '/snake' do
   map = GameMap.new(params[:map])
-  # AI.new(map).move
+  AI.new(map).move
 end
